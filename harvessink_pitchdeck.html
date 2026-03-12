@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HarvesSink — Pitch Deck 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #04080f;
+  --surface: #0a1220;
+  --surface2: #0f1c2e;
+  --teal: #00e5c0;
+  --teal-dim: #00b89a;
+  --amber: #f5a623;
+  --red: #ff4d6d;
+  --blue: #4a9eff;
+  --white: #f0f4f8;
+  --muted: #6b7f96;
+  --border: rgba(0,229,192,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Mono', monospace;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ─── NOISE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.4;
+}
+
+/* ─── SECTION BASE ─── */
+section {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 8vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+h1, h2, h3 {
+  font-family: 'Syne', sans-serif;
+}
+
+/* ─── HERO ─── */
+#hero {
+  background: radial-gradient(ellipse 80% 60% at 60% 40%, #00302a 0%, #04080f 70%);
+  min-height: 100vh;
+}
+
+.hero-bg-rings {
+  position: absolute;
+  right: -10vw; top: 50%;
+  transform: translateY(-50%);
+  width: 70vw; height: 70vw;
+  pointer-events: none;
+}
+
+.hero-bg-rings circle {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 0.5;
+  animation: pulse-ring 4s ease-in-out infinite;
+}
+.hero-bg-rings circle:nth-child(2) { animation-delay: 0.8s; }
+.hero-bg-rings circle:nth-child(3) { animation-delay: 1.6s; }
+.hero-bg-rings circle:nth-child(4) { animation-delay: 2.4s; }
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.06; }
+  50% { opacity: 0.18; }
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  padding: 6px 14px;
+  border-radius: 2px;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-title {
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero-title .accent { color: var(--teal); }
+.hero-title .sub { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 0.6em; color: var(--muted); display: block; letter-spacing: 0em; }
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  font-family: 'DM Mono', monospace;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+.stat-pill {
+  display: flex; flex-direction: column;
+}
+.stat-pill .num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--teal);
+  line-height: 1;
+}
+.stat-pill .label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.hero-meta {
+  position: absolute; bottom: 2.5rem; left: 8vw;
+  font-size: 0.6rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--muted);
+  animation: fadeUp 0.8s 0.6s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── PROBLEM ─── */
+#problem {
+  background: var(--bg);
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6vw;
+  align-items: center;
+}
+
+.problem-visual {
+  position: relative;
+  height: 420px;
+}
+
+.drain-pipe {
+  position: absolute;
+  left: 50%; top: 0;
+  transform: translateX(-50%);
+  width: 80px; height: 100%;
+}
+
+.water-drop {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 16px; height: 22px;
+  background: var(--blue);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: drip 2.5s ease-in infinite;
+  opacity: 0;
+}
+.water-drop:nth-child(1) { animation-delay: 0s; }
+.water-drop:nth-child(2) { animation-delay: 0.7s; width: 12px; height: 17px; }
+.water-drop:nth-child(3) { animation-delay: 1.4s; width: 20px; height: 28px; }
+.water-drop:nth-child(4) { animation-delay: 2.1s; width: 10px; height: 14px; }
+
+@keyframes drip {
+  0% { top: -20px; opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.6; }
+  100% { top: 420px; opacity: 0; }
+}
+
+.problem-big-stat {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+.problem-big-stat .big-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+}
+.problem-big-stat .big-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pipe-visual {
+  position: absolute;
+  left: 50%; top: 0;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--surface2) 10%, var(--surface2) 90%, transparent);
+  border-radius: 2px;
+}
+
+.problem-points h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.problem-points h2 em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--teal);
+}
+
+.pain-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.pain-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.pain-text {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.pain-text strong { color: var(--white); }
+
+/* ─── SOLUTION ─── */
+#solution {
+  background: radial-gradient(ellipse 60% 50% at 30% 50%, #001f1a 0%, var(--bg) 70%);
+}
+
+.solution-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5vw;
+  align-items: center;
+}
+
+.solution-text h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.solution-text h2 span { color: var(--teal); }
+
+.solution-text p {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.tech-badges {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+}
+.badge {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--teal);
+  background: rgba(0,229,192,0.05);
+}
+
+/* FLOW DIAGRAM */
+.flow-diagram {
+  position: relative;
+}
+
+.flow-node {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  transition: border-color 0.3s;
+}
+.flow-node:hover { border-color: var(--teal); }
+
+.flow-node-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.4rem;
+}
+.flow-node-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.flow-node-desc {
+  font-size: 0.7rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 0.3rem;
+}
+
+.flow-arrow {
+  text-align: center;
+  color: var(--teal);
+  font-size: 1rem;
+  line-height: 0.8;
+  margin: 0.2rem 0;
+  opacity: 0.5;
+}
+
+.fork-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.fork-node {
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+}
+.fork-harvest { background: rgba(0,229,192,0.1); border: 1px solid var(--teal); color: var(--teal); }
+.fork-drain   { background: rgba(255,77,109,0.1); border: 1px solid var(--red); color: var(--red); }
+
+/* ─── TECHNOLOGY / BRAIN ─── */
+#technology {
+  background: var(--bg);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.tech-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.tech-card:hover { transform: translateY(-4px); border-color: var(--teal); }
+
+.tech-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--teal);
+}
+
+.tech-card.amber::before { background: var(--amber); }
+.tech-card.red::before { background: var(--red); }
+.tech-card.blue::before { background: var(--blue); }
+
+.tc-icon {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+.tc-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+.tc-desc {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.tc-tag {
+  display: inline-block;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  border: 1px solid rgba(245,166,35,0.3);
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-top: 0.8rem;
+}
+
+/* ─── BOD/COD ML SECTION ─── */
+#ml-brain {
+  background: radial-gradient(ellipse 70% 60% at 70% 50%, #0f1a2e 0%, var(--bg) 70%);
+}
+
+.ml-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5vw;
+  align-items: center;
+}
+
+.ml-text h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.ml-text h2 span { color: var(--blue); }
+.ml-text p { color: var(--muted); font-size: 0.82rem; line-height: 1.8; margin-bottom: 1.2rem; }
+
+.ml-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.ml-metric {
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-align: center;
+}
+.ml-metric .val {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--blue);
+}
+.ml-metric .lbl {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ML DIAGRAM */
+.ml-diagram {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.ml-diagram-title {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.5rem;
+}
+
+.ml-inputs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+}
+
+.ml-input-node {
+  text-align: center;
+  padding: 0.6rem 0.8rem;
+  background: rgba(74,158,255,0.08);
+  border: 1px solid rgba(74,158,255,0.25);
+  border-radius: 4px;
+  font-size: 0.65rem;
+  color: var(--blue);
+}
+
+.ml-arrows-down {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  letter-spacing: 0.5em;
+}
+
+.ml-model-box {
+  background: linear-gradient(135deg, rgba(74,158,255,0.15), rgba(0,229,192,0.08));
+  border: 1px solid rgba(74,158,255,0.4);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.ml-model-box .model-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+.ml-model-box .model-sub {
+  font-size: 0.6rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.ml-outputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.ml-out-node {
+  text-align: center;
+  padding: 0.6rem;
+  background: rgba(0,229,192,0.07);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.62rem;
+  color: var(--teal);
+}
+.ml-out-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ─── QUAD GUARD ─── */
+#safety {
+  background: var(--bg);
+}
+
+.safety-h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.safety-h2 span { color: var(--red); }
+
+.safety-sub {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-bottom: 3rem;
+}
+
+.tiers-container {
+  position: relative;
+  max-width: 820px;
+}
+
+.tier-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 180px;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.tier-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--surface2);
+  text-align: right;
+  letter-spacing: -0.05em;
+}
+
+.tier-card {
+  padding: 1.2rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+.tier-card:hover { border-color: var(--teal); }
+
+.tier-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+.tier-desc {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.tier-badge {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tb-hw { background: rgba(245,166,35,0.1); border: 1px solid var(--amber); color: var(--amber); }
+.tb-sig { background: rgba(74,158,255,0.1); border: 1px solid var(--blue); color: var(--blue); }
+.tb-stat { background: rgba(0,229,192,0.1); border: 1px solid var(--teal); color: var(--teal); }
+.tb-phys { background: rgba(255,77,109,0.1); border: 1px solid var(--red); color: var(--red); }
+
+/* ─── RESULTS ─── */
+#results {
+  background: radial-gradient(ellipse 70% 60% at 40% 50%, #001a10 0%, var(--bg) 70%);
+}
+
+.results-h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+}
+.results-h2 span { color: var(--teal); }
+
+.results-bar-chart {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.chart-title {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.bar-group {
+  margin-bottom: 1.2rem;
+}
+
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  margin-bottom: 0.4rem;
+  color: var(--muted);
+}
+.bar-label .sample-name { color: var(--white); }
+.bar-label .decision { font-weight: 600; }
+.decision.harvest { color: var(--teal); }
+.decision.drain { color: var(--red); }
+
+.bar-track {
+  background: var(--surface2);
+  border-radius: 3px;
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bar-tds { background: linear-gradient(to right, var(--blue), rgba(74,158,255,0.4)); }
+.bar-ph  { background: linear-gradient(to right, var(--amber), rgba(245,166,35,0.4)); }
+.bar-ntu { background: linear-gradient(to right, var(--teal), rgba(0,229,192,0.4)); }
+
+.results-accuracy {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.acc-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem;
+  text-align: center;
+}
+.acc-circle {
+  width: 100px; height: 100px;
+  margin: 0 auto 1rem;
+  position: relative;
+}
+.acc-circle svg { transform: rotate(-90deg); }
+.acc-circle .circle-bg { fill: none; stroke: var(--surface2); stroke-width: 8; }
+.acc-circle .circle-fill { fill: none; stroke-width: 8; stroke-linecap: round; stroke-dasharray: 283; }
+.acc-circle .circle-fill.teal { stroke: var(--teal); stroke-dashoffset: calc(283 - 283 * 0.92); }
+.acc-circle .circle-fill.amber { stroke: var(--amber); stroke-dashoffset: calc(283 - 283 * 0.96); }
+.acc-circle .circle-fill.blue  { stroke: var(--blue);  stroke-dashoffset: calc(283 - 283 * 0.88); }
+.acc-label-inner {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+.acc-desc { font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
+
+/* ─── CITY SCALE ─── */
+#scale {
+  background: var(--bg);
+}
+
+.scale-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5vw;
+  align-items: center;
+}
+
+.scale-h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.scale-h2 span { color: var(--amber); }
+
+.scale-text p { color: var(--muted); font-size: 0.82rem; line-height: 1.8; margin-bottom: 1rem; }
+
+.scale-numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.scale-num-card {
+  padding: 1rem;
+  background: var(--surface);
+  border-left: 2px solid var(--amber);
+  padding-left: 1.2rem;
+}
+.scale-num-card .n {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--amber);
+  line-height: 1;
+}
+.scale-num-card .l {
+  font-size: 0.62rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-top: 4px;
+}
+
+/* CITY MAP VIZ */
+.city-map {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+.city-map-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1rem;
+}
+
+.city-dot {
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  animation: city-pulse 2s ease-in-out infinite;
+}
+
+.city-dot::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  animation: ripple 2s ease-out infinite;
+  opacity: 0;
+}
+
+@keyframes city-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.5); opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.city-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(245,166,35,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,166,35,0.04) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* ─── TRL ROADMAP ─── */
+#roadmap {
+  background: radial-gradient(ellipse 60% 50% at 50% 80%, #0d1f0d 0%, var(--bg) 60%);
+}
+
+.roadmap-h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+}
+.roadmap-h2 span { color: var(--teal); }
+
+.trl-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 2rem;
+}
+
+.trl-node {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.trl-node::after {
+  content: '';
+  position: absolute;
+  top: 18px; left: 50%;
+  width: 100%; height: 2px;
+  background: var(--border);
+}
+.trl-node:last-child::after { display: none; }
+.trl-node.active::after { background: linear-gradient(to right, var(--teal), var(--border)); }
+
+.trl-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  margin: 0 auto 0.8rem;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  position: relative; z-index: 1;
+}
+
+.trl-dot.done { background: var(--teal); color: var(--bg); }
+.trl-dot.current { background: var(--amber); color: var(--bg); box-shadow: 0 0 20px rgba(245,166,35,0.4); }
+.trl-dot.future { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); }
+
+.trl-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.trl-title.done-t { color: var(--teal); }
+.trl-title.current-t { color: var(--amber); }
+.trl-title.future-t { color: var(--muted); }
+
+.trl-desc {
+  font-size: 0.58rem;
+  color: var(--muted);
+  line-height: 1.5;
+  padding: 0 0.3rem;
+}
+
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.goal-card {
+  padding: 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.goal-phase {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.8rem;
+}
+.goal-phase.med { color: var(--amber); }
+.goal-phase.lng { color: var(--blue); }
+.goal-item {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.7rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.goal-item .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.goal-item .dot.amber { background: var(--amber); }
+.goal-item .dot.blue  { background: var(--blue); }
+
+/* ─── TEAM / CLOSE ─── */
+#team {
+  background: var(--bg);
+  min-height: 60vh;
+}
+
+.team-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5vw;
+  align-items: center;
+}
+
+.team-h2 {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.team-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.team-card {
+  padding: 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.team-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.3rem;
+}
+.team-role {
+  font-size: 0.62rem;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+.team-skills {
+  font-size: 0.65rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.advisor-box {
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.advisor-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.advisor-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+.advisor-inst {
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+.milestones-side {
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.milestones-title {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1.5rem;
+}
+.milestone-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.milestone-check {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+.milestone-text {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.milestone-text strong { color: var(--white); }
+
+/* ─── CTA CLOSER ─── */
+#cta {
+  min-height: 70vh;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, #003326 0%, var(--bg) 70%);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  padding: 6px 14px;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+}
+
+.cta-h1 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.cta-h1 .em { color: var(--teal); }
+.cta-h1 .em2 { 
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.cta-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+}
+
+.cta-contacts {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-chip {
+  padding: 0.8rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.contact-chip span { color: var(--teal); display: block; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 4px; }
+
+.cta-footer {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1.2rem 8vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(4,8,15,0.9), transparent);
+  backdrop-filter: blur(8px);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.nav-logo .hs { color: var(--teal); }
+
+.nav-links {
+  display: flex; gap: 2rem; list-style: none;
+}
+.nav-links a {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--teal); }
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  section { padding: 60px 5vw; }
+  .problem-grid, .solution-layout, .ml-layout, .scale-layout, .team-layout { grid-template-columns: 1fr; }
+  .tech-grid, .results-accuracy, .goals-grid { grid-template-columns: 1fr 1fr; }
+  .trl-track { flex-wrap: wrap; }
+  .hero-title { font-size: 2.8rem; }
+  nav { padding: 1rem 5vw; }
+  .nav-links { display: none; }
+}
+
+/* Progress indicator */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--teal);
+  z-index: 9000;
+  transition: width 0.1s linear;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <div class="nav-logo"><span class="hs">Harves</span>Sink</div>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#ml-brain">ML Brain</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <svg class="hero-bg-rings" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="300" cy="300" r="100" style="animation-delay:0s"/>
+    <circle cx="300" cy="300" r="170" style="animation-delay:0.8s"/>
+    <circle cx="300" cy="300" r="240" style="animation-delay:1.6s"/>
+    <circle cx="300" cy="300" r="310" style="animation-delay:2.4s"/>
+  </svg>
+
+  <div class="hero-tag">Pitch Deck 2026 · IIIT-Delhi · iPD-CP</div>
+
+  <h1 class="hero-title">
+    Harves<span class="accent">Sink</span>
+    <span class="sub">Intelligent Greywater, Reimagined</span>
+  </h1>
+
+  <p class="hero-desc">
+    An AI-powered under-sink system that evaluates kitchen wastewater in real-time, predicts lab-grade contaminants, and autonomously diverts safe water for reuse — before it ever reaches the drain.
+  </p>
+
+  <div class="hero-stats">
+    <div class="stat-pill">
+      <span class="num">30%</span>
+      <span class="label">Freshwater Lost<br>as Greywater</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num">92%</span>
+      <span class="label">Classification<br>Accuracy (PoC)</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num">20–30L</span>
+      <span class="label">Recovered<br>per Household/Day</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num">TRL-5</span>
+      <span class="label">Current<br>Readiness Level</span>
+    </div>
+  </div>
+
+  <div class="hero-meta">Aarushi Chawla · Vivek Dagar · Advisor: Dr. Anuj Grover · IIIT-Delhi</div>
+</section>
+
+<!-- ══════════════ PROBLEM ══════════════ -->
+<section id="problem">
+  <div class="section-label">01 — The Problem</div>
+  <div class="problem-grid">
+    <div class="problem-points">
+      <h2 class="reveal">India's cities are running <em>dry</em> — and draining away the answer.</h2>
+      <div class="pain-item reveal reveal-delay-1">
+        <div class="pain-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:0.7rem;color:var(--teal);padding-top:3px;">01</div>
+        <div class="pain-text"><strong>~30% of domestic freshwater</strong> exits as kitchen greywater — often clean enough to reuse, always sent to drain.</div>
+      </div>
+      <div class="pain-item reveal reveal-delay-2">
+        <div class="pain-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:0.7rem;color:var(--teal);padding-top:3px;">02</div>
+        <div class="pain-text"><strong>Bengaluru & Chennai</strong> face extreme water stress. Households spend 15% of monthly income on private tankers.</div>
+      </div>
+      <div class="pain-item reveal reveal-delay-3">
+        <div class="pain-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:0.7rem;color:var(--teal);padding-top:3px;">03</div>
+        <div class="pain-text"><strong>Existing solutions are "dumb"</strong> — mechanical diverters with no sensing, no safety logic, no intelligence.</div>
+      </div>
+      <div class="pain-item reveal reveal-delay-4">
+        <div class="pain-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:0.7rem;color:var(--teal);padding-top:3px;">04</div>
+        <div class="pain-text"><strong>Lab sensors exist</strong> but are never deployed at-sink. Real-time BOD/COD prediction from cheap sensors? Not done — until now.</div>
+      </div>
+    </div>
+
+    <div class="problem-visual reveal">
+      <div class="pipe-visual"></div>
+      <div class="drain-pipe">
+        <div class="water-drop"></div>
+        <div class="water-drop"></div>
+        <div class="water-drop"></div>
+        <div class="water-drop"></div>
+      </div>
+      <div class="problem-big-stat">
+        <div class="big-num">1B+</div>
+        <div class="big-label">litres wasted daily<br>across Indian metros</div>
+      </div>
+      <!-- Mini comparison bars -->
+      <div style="position:absolute; bottom:0; left:0; right:0; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:1rem;">
+        <div style="font-size:0.55rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); margin-bottom:0.8rem;">Water scarcity index — key cities</div>
+        <div style="display:flex; flex-direction:column; gap:0.5rem;">
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:0.62rem; margin-bottom:3px;"><span>Bengaluru</span><span style="color:var(--red)">Critical</span></div>
+            <div style="background:var(--surface2); height:6px; border-radius:3px;"><div style="width:92%; background:var(--red); height:100%; border-radius:3px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:0.62rem; margin-bottom:3px;"><span>Chennai</span><span style="color:var(--red)">Severe</span></div>
+            <div style="background:var(--surface2); height:6px; border-radius:3px;"><div style="width:85%; background:linear-gradient(to right, var(--red), var(--amber)); height:100%; border-radius:3px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:0.62rem; margin-bottom:3px;"><span>Delhi NCR</span><span style="color:var(--amber)">High</span></div>
+            <div style="background:var(--surface2); height:6px; border-radius:3px;"><div style="width:72%; background:var(--amber); height:100%; border-radius:3px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SOLUTION ══════════════ -->
+<section id="solution">
+  <div class="section-label">02 — The Solution</div>
+  <div class="solution-layout">
+    <div class="solution-text">
+      <h2 class="reveal">Source-Level <span>Intelligence</span> for Urban Water.</h2>
+      <p class="reveal reveal-delay-1">HarvesSink sits under your kitchen sink. It reads the water, decides its fate, and acts — in under 10 seconds. No plumber needed. No daily interaction. Just silent, autonomous protection.</p>
+      <p class="reveal reveal-delay-2">A dual-layer "Reflex + Brain" architecture ensures 100% uptime: edge logic handles real-time actuation, while the ML brain predicts invisible contaminants and connects to the city grid.</p>
+      <div class="tech-badges reveal reveal-delay-3">
+        <span class="badge">STM32 MCU</span>
+        <span class="badge">pH · TDS · Turbidity</span>
+        <span class="badge">Dual Solenoid Valves</span>
+        <span class="badge">XGBoost Regressor</span>
+        <span class="badge">FastAPI Backend</span>
+        <span class="badge">Next.js Dashboard</span>
+        <span class="badge">FMEA Validated</span>
+        <span class="badge">WHO / FAO / CPCB Aligned</span>
+      </div>
+    </div>
+
+    <div class="flow-diagram reveal reveal-delay-1">
+      <div class="flow-node">
+        <div class="flow-node-label">Inlet</div>
+        <div class="flow-node-title">Kitchen Sink Drain</div>
+        <div class="flow-node-desc">Max 8L/min · 40mm trap → 50mm pipe · Matala mesh pre-filter</div>
+      </div>
+      <div class="flow-arrow">↓↓↓</div>
+      <div class="flow-node">
+        <div class="flow-node-label">Stabilisation</div>
+        <div class="flow-node-title">2.5L Buffer Chamber</div>
+        <div class="flow-node-desc">Eliminates turbulence & air bubbles · EWMA-smoothed readings</div>
+      </div>
+      <div class="flow-arrow">↓↓↓</div>
+      <div class="flow-node" style="border-color: rgba(0,229,192,0.3);">
+        <div class="flow-node-label">Intelligence</div>
+        <div class="flow-node-title">Sensor Chamber + STM32</div>
+        <div class="flow-node-desc">pH · TDS · Turbidity — 10s averaged · Z-score anomaly · Quad-Guard™ safety tiers</div>
+      </div>
+      <div class="flow-arrow">↓↓↓</div>
+      <div class="fork-container">
+        <div class="fork-node fork-harvest"> HARVEST<br><small style="font-weight:300; font-size:0.7em;">→ 25L Storage Tank</small></div>
+        <div class="fork-node fork-drain"> DRAIN<br><small style="font-weight:300; font-size:0.7em;">→ Sewage (safe)</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TECHNOLOGY ══════════════ -->
+<section id="technology">
+  <div class="section-label">03 — Architecture</div>
+  <h2 style="font-size: clamp(2rem, 4vw, 3.5rem); font-weight:800; line-height:1.1;" class="reveal">"Reflex vs Brain" — <br>Two Layers of Intelligence</h2>
+  <div class="tech-grid" style="margin-top: 2.5rem;">
+    <div class="tech-card reveal reveal-delay-1">
+      <div class="tc-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--teal);">Edge</div>
+      <div class="tc-title">Reflex Layer (Edge)</div>
+      <div class="tc-desc">Arduino/STM32 at 1Hz. EWMA signal smoothing, Z-score baseline deviation, 3-second confidence counter debouncing. Operates fully offline — server goes down, system stays live.</div>
+      <span class="tc-tag">Always On · Deterministic</span>
+    </div>
+    <div class="tech-card amber reveal reveal-delay-2">
+      <div class="tc-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--amber);">ML</div>
+      <div class="tc-title">Brain Layer (ML Hub)</div>
+      <div class="tc-desc">FastAPI server running XGBoost Multi-Output Regressor. Trained on 1,300+ days of Bengaluru STP data. Predicts BOD, COD, Ammonia from cheap analog sensors alone.</div>
+      <span class="tc-tag" style="border-color:rgba(245,166,35,0.3); color:var(--amber);">Soft-Sensing · Predictive</span>
+    </div>
+    <div class="tech-card blue reveal reveal-delay-3">
+      <div class="tc-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--blue);">City</div>
+      <div class="tc-title">Municipal Digital Twin</div>
+      <div class="tc-desc">50-node simulated city network. Real-time heatmaps of water quality clusters. Auto-flags neighborhood-wide contamination events — pipeline breach, illegal dumping — before STPs are overwhelmed.</div>
+      <span class="tc-tag" style="border-color:rgba(74,158,255,0.3); color:var(--blue);">City Scale · Crisis Detection</span>
+    </div>
+    <div class="tech-card red reveal reveal-delay-4">
+      <div class="tc-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--red);">Safe</div>
+      <div class="tc-title">Quad-Guard™ Safety</div>
+      <div class="tc-desc">4-tier FMEA-validated watchdog: boundary checks, signal integrity, Z-score (4.5σ), correlation physics. 37 failure modes catalogued. Default-to-drain on any anomaly.</div>
+      <span class="tc-tag" style="border-color:rgba(255,77,109,0.3); color:var(--red);">FMEA · IEC Aligned</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ML BRAIN ══════════════ -->
+<section id="ml-brain">
+  <div class="section-label">04 — ML Innovation</div>
+  <div class="ml-layout">
+    <div class="ml-text">
+      <h2 class="reveal">Predicting what labs <span>can't measure</span> at-sink.</h2>
+      <p class="reveal reveal-delay-1">BOD (Biological Oxygen Demand), COD (Chemical Oxygen Demand), and Ammonia are the gold-standard metrics for water toxicity. Normally they require lab equipment and 5-day incubation. We predict them in real-time from ₹500 sensors.</p>
+      <p class="reveal reveal-delay-2">Our XGBoost Multi-Output Regressor — trained on 1,300+ days of Bengaluru Sewage Treatment Plant operational data — performs "Soft-Sensing": mapping cheap analog readings to lab-grade outputs with location-aware one-hot encoding for different urban industrial profiles.</p>
+      <div class="ml-metrics reveal reveal-delay-3">
+        <div class="ml-metric">
+          <div class="val">1300+</div>
+          <div class="lbl">Training Days<br>(Bengaluru STP)</div>
+        </div>
+        <div class="ml-metric">
+          <div class="val">3</div>
+          <div class="lbl">Predicted<br>Lab Outputs</div>
+        </div>
+        <div class="ml-metric">
+          <div class="val">R²</div>
+          <div class="lbl">XGBoost<br>Performance</div>
+        </div>
+        <div class="ml-metric">
+          <div class="val">~0s</div>
+          <div class="lbl">Inference<br>Latency</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ml-diagram reveal reveal-delay-1">
+      <div class="ml-diagram-title">// XGBoost Soft-Sensing Pipeline</div>
+      
+      <div class="ml-inputs">
+        <div class="ml-input-node">pH<br><small>0–14</small></div>
+        <div class="ml-input-node">TDS<br><small>0–2000ppm</small></div>
+        <div class="ml-input-node">Turbidity<br><small>0–100 NTU</small></div>
+        <div class="ml-input-node">Location<br><small>One-Hot</small></div>
+      </div>
+
+      <div class="ml-arrows-down">↓ ↓ ↓ ↓</div>
+
+      <div class="ml-model-box">
+        <div class="model-name">XGBoost Multi-Output Regressor</div>
+        <div class="model-sub">Trained on Bengaluru STP Historical Dataset · 1300+ Days</div>
+      </div>
+
+      <div class="ml-arrows-down">↓ ↓ ↓</div>
+
+      <div class="ml-outputs">
+        <div class="ml-out-node">
+          <span class="ml-out-val">BOD</span>
+          Biological<br>Oxygen Demand<br><small style="color:var(--muted)">mg/L</small>
+        </div>
+        <div class="ml-out-node">
+          <span class="ml-out-val">COD</span>
+          Chemical<br>Oxygen Demand<br><small style="color:var(--muted)">mg/L</small>
+        </div>
+        <div class="ml-out-node">
+          <span class="ml-out-val">NH₃</span>
+          Ammonia<br>Concentration<br><small style="color:var(--muted)">mg/L</small>
+        </div>
+      </div>
+
+      <div style="margin-top:1.2rem; padding:0.8rem 1rem; background:rgba(0,229,192,0.05); border:1px solid var(--border); border-radius:4px; font-size:0.65rem; color:var(--muted); line-height:1.5;">
+        <span style="color:var(--teal)">Location-Aware:</span> Hebbal · Jakkur · Madiwala profiles encode neighborhood industrial signatures, improving prediction accuracy for locally-specific chemical runoff.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SAFETY ══════════════ -->
+<section id="safety">
+  <div class="section-label">05 — Safety Engineering</div>
+  <h2 class="safety-h2 reveal">Quad-Guard™ — <span>4-Tier</span> Watchdog</h2>
+  <p class="safety-sub reveal reveal-delay-1">FMEA-validated. 37 failure modes. Default-to-drain. Every single time.</p>
+
+  <div class="tiers-container">
+    <div class="tier-row reveal reveal-delay-1">
+      <div class="tier-num">01</div>
+      <div class="tier-card">
+        <div class="tier-name">Boundary Check</div>
+        <div class="tier-desc">Catastrophic hardware failure detection. pH &lt; 1 or pH &gt; 13 triggers immediate isolation. Catches sensor wire breaks, electrode failure.</div>
+      </div>
+      <div class="tier-badge tb-hw">Hardware Fault</div>
+    </div>
+    <div class="tier-row reveal reveal-delay-2">
+      <div class="tier-num">02</div>
+      <div class="tier-card">
+        <div class="tier-name">Signal Integrity</div>
+        <div class="tier-desc">Zero-variance detection identifies "stuck" or frozen sensors. A flat signal = failed sensor = drain immediately. No silent failures.</div>
+      </div>
+      <div class="tier-badge tb-sig">Signal Health</div>
+    </div>
+    <div class="tier-row reveal reveal-delay-3">
+      <div class="tier-num">03</div>
+      <div class="tier-card">
+        <div class="tier-name">Local Z-Score Nudge</div>
+        <div class="tier-desc">Edge learns household tap water baseline. Deviations beyond 4.5σ flag sudden chemical anomalies — soap splash, cleaning product — with 3s debounce.</div>
+      </div>
+      <div class="tier-badge tb-stat">Statistical</div>
+    </div>
+    <div class="tier-row reveal reveal-delay-4">
+      <div class="tier-num">04</div>
+      <div class="tier-card">
+        <div class="tier-name">Correlation Physics</div>
+        <div class="tier-desc">"Impossible physics" detection: high turbidity + low TDS is physically inconsistent. Signals sensor cross-contamination or maintenance needed. Drains.</div>
+      </div>
+      <div class="tier-badge tb-phys">Physics Check</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ RESULTS ══════════════ -->
+<section id="results">
+  <div class="section-label">06 — Validated Results</div>
+  <h2 class="results-h2 reveal"><span>92%</span> accuracy. Tested on five real water types.</h2>
+
+  <div class="results-bar-chart reveal reveal-delay-1">
+    <div class="chart-title">// Experimental Sample Results — TDS · pH · Turbidity</div>
+    
+    <!-- RO -->
+    <div class="bar-group">
+      <div class="bar-label"><span class="sample-name">RO Water</span><span class="decision harvest"> HARVEST</span></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px;">
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">TDS 40ppm</div>
+          <div class="bar-track"><div class="bar-fill bar-tds" style="width:4%"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">pH 6.9</div>
+          <div class="bar-track"><div class="bar-fill bar-ph" style="width:49%"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">Turb. 0.8 NTU</div>
+          <div class="bar-track"><div class="bar-fill bar-ntu" style="width:2%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tap -->
+    <div class="bar-group">
+      <div class="bar-label"><span class="sample-name">Tap Water (Hard)</span><span class="decision harvest"> HARVEST</span></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px;">
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">TDS 850ppm</div>
+          <div class="bar-track"><div class="bar-fill bar-tds" style="width:85%"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">pH 7.8</div>
+          <div class="bar-track"><div class="bar-fill bar-ph" style="width:56%"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">Turb. 3.0 NTU</div>
+          <div class="bar-track"><div class="bar-fill bar-ntu" style="width:15%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Soapy -->
+    <div class="bar-group">
+      <div class="bar-label"><span class="sample-name">Soapy Water</span><span class="decision drain"> DRAIN</span></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px;">
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">TDS 1100ppm ⚠</div>
+          <div class="bar-track"><div class="bar-fill bar-tds" style="width:100%; background:var(--red);"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">pH 8.9 ⚠</div>
+          <div class="bar-track"><div class="bar-fill bar-ph" style="width:64%; background:var(--red);"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">Turb. 10.5 NTU</div>
+          <div class="bar-track"><div class="bar-fill bar-ntu" style="width:52%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detergent -->
+    <div class="bar-group">
+      <div class="bar-label"><span class="sample-name">Detergent Water</span><span class="decision drain"> DRAIN</span></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px;">
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">TDS 1300ppm ⚠</div>
+          <div class="bar-track"><div class="bar-fill bar-tds" style="width:100%; background:var(--red);"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">pH 9.5 ⚠</div>
+          <div class="bar-track"><div class="bar-fill bar-ph" style="width:68%; background:var(--red);"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">Turb. 15.0 NTU</div>
+          <div class="bar-track"><div class="bar-fill bar-ntu" style="width:75%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Muddy -->
+    <div class="bar-group">
+      <div class="bar-label"><span class="sample-name">Muddy Water</span><span class="decision drain"> DRAIN</span></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px;">
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">TDS 850ppm</div>
+          <div class="bar-track"><div class="bar-fill bar-tds" style="width:85%"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">pH 7.7</div>
+          <div class="bar-track"><div class="bar-fill bar-ph" style="width:55%"></div></div>
+        </div>
+        <div>
+          <div style="font-size:0.55rem; color:var(--muted); margin-bottom:3px;">Turb. 45.0 NTU ⚠</div>
+          <div class="bar-track"><div class="bar-fill bar-ntu" style="width:100%; background:var(--red);"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:1rem; font-size:0.6rem; color:var(--muted); display:flex; gap:1.5rem;">
+      <span>Thresholds: TDS ≤1000ppm · pH 6.5–8.5 · Turbidity ≤20 NTU</span>
+      <span style="color:var(--red)">⚠ = threshold exceeded → DRAIN</span>
+    </div>
+  </div>
+
+  <div class="results-accuracy reveal reveal-delay-2">
+    <div class="acc-card">
+      <div class="acc-circle">
+        <svg viewBox="0 0 100 100" width="100" height="100">
+          <circle class="circle-bg" cx="50" cy="50" r="45"/>
+          <circle class="circle-fill teal" cx="50" cy="50" r="45"/>
+        </svg>
+        <div class="acc-label-inner" style="color:var(--teal)">92%</div>
+      </div>
+      <div class="tc-title" style="margin-bottom:0.5rem;">Classification Accuracy</div>
+      <div class="acc-desc">25 trials across 5 water types. Decision logic triggered every 10 seconds.</div>
+    </div>
+    <div class="acc-card">
+      <div class="acc-circle">
+        <svg viewBox="0 0 100 100" width="100" height="100">
+          <circle class="circle-bg" cx="50" cy="50" r="45"/>
+          <circle class="circle-fill amber" cx="50" cy="50" r="45"/>
+        </svg>
+        <div class="acc-label-inner" style="color:var(--amber)">4%</div>
+      </div>
+      <div class="tc-title" style="margin-bottom:0.5rem;">False Positive Rate</div>
+      <div class="acc-desc">Clean water flagged as dirty. 1 instance in 25 trials.</div>
+    </div>
+    <div class="acc-card">
+      <div class="acc-circle">
+        <svg viewBox="0 0 100 100" width="100" height="100">
+          <circle class="circle-bg" cx="50" cy="50" r="45"/>
+          <circle class="circle-fill blue" cx="50" cy="50" r="45"/>
+        </svg>
+        <div class="acc-label-inner" style="color:var(--blue)">4%</div>
+      </div>
+      <div class="tc-title" style="margin-bottom:0.5rem;">False Negative Rate</div>
+      <div class="acc-desc">Dirty water allowed to harvest. 1 instance. Addressed via Quad-Guard Tier 3.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CITY SCALE ══════════════ -->
+<section id="scale">
+  <div class="section-label">07 — City Scale Impact</div>
+  <div class="scale-layout">
+    <div class="scale-text">
+      <h2 class="scale-h2 reveal">One sink. <span>A thousand nodes.</span> A resilient city.</h2>
+      <p class="reveal reveal-delay-1">HarvesSink isn't just a household device — it's a distributed sensor network. Each unit feeds anonymised water quality data to the Municipal Digital Twin, creating a real-time map of urban water health.</p>
+      <p class="reveal reveal-delay-2">Crisis events — illegal industrial dumping, pipeline contamination — appear as anomaly clusters before they overwhelm STPs. This is Source-Level Load Shedding for water infrastructure.</p>
+      <div class="scale-numbers reveal reveal-delay-3">
+        <div class="scale-num-card">
+          <div class="n">50+</div>
+          <div class="l">Node City<br>Network (Simulated)</div>
+        </div>
+        <div class="scale-num-card">
+          <div class="n">100M+</div>
+          <div class="l">Litres Saved/Day<br>at Bengaluru Scale</div>
+        </div>
+        <div class="scale-num-card">
+          <div class="n">0</div>
+          <div class="l">Plumbing Changes<br>Required</div>
+        </div>
+        <div class="scale-num-card">
+          <div class="n">24/7</div>
+          <div class="l">Autonomous<br>Operation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="city-map reveal reveal-delay-1">
+      <div class="city-grid-lines"></div>
+      <div class="city-map-label">// Municipal Sensor Network — Live Simulation</div>
+
+      <!-- Dots representing nodes across the map -->
+      <div class="city-dot" style="background:var(--teal); color:var(--teal); left:30%; top:25%; animation-delay:0s;"></div>
+      <div class="city-dot" style="background:var(--teal); color:var(--teal); left:55%; top:20%; animation-delay:0.4s;"></div>
+      <div class="city-dot" style="background:var(--teal); color:var(--teal); left:70%; top:40%; animation-delay:0.8s;"></div>
+      <div class="city-dot" style="background:var(--amber); color:var(--amber); left:25%; top:55%; animation-delay:0.2s;"></div>
+      <div class="city-dot" style="background:var(--teal); color:var(--teal); left:45%; top:60%; animation-delay:1.2s;"></div>
+      <div class="city-dot" style="background:var(--red); color:var(--red); left:60%; top:65%; animation-delay:0.6s; width:14px; height:14px;"></div>
+      <div class="city-dot" style="background:var(--teal); color:var(--teal); left:80%; top:55%; animation-delay:1.0s;"></div>
+      <div class="city-dot" style="background:var(--teal); color:var(--teal); left:15%; top:40%; animation-delay:1.4s;"></div>
+      <div class="city-dot" style="background:var(--amber); color:var(--amber); left:38%; top:35%; animation-delay:0.3s;"></div>
+      <div class="city-dot" style="background:var(--teal); color:var(--teal); left:72%; top:20%; animation-delay:1.6s;"></div>
+      <div class="city-dot" style="background:var(--teal); color:var(--teal); left:85%; top:30%; animation-delay:0.7s;"></div>
+      <div class="city-dot" style="background:var(--teal); color:var(--teal); left:20%; top:70%; animation-delay:1.8s;"></div>
+
+      <!-- Legend -->
+      <div style="position:absolute; bottom:1rem; left:1.5rem; right:1.5rem; display:flex; gap:1.2rem;">
+        <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.58rem; color:var(--muted);">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--teal);"></div> Normal
+        </div>
+        <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.58rem; color:var(--muted);">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--amber);"></div> Elevated
+        </div>
+        <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.58rem; color:var(--muted);">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--red);"></div> Alert · Contamination Cluster
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ROADMAP ══════════════ -->
+<section id="roadmap">
+  <div class="section-label">08 — TRL Roadmap</div>
+  <h2 class="roadmap-h2 reveal">From PoC to <span>Product.</span></h2>
+
+  <div class="trl-track reveal reveal-delay-1">
+    <div class="trl-node active">
+      <div class="trl-dot done">3</div>
+      <div class="trl-title done-t">TRL 3</div>
+      <div class="trl-desc">PoC validated<br>Multi-sensor classification<br>Redbricks Winner #1<br>RIISE 2026</div>
+    </div>
+    <div class="trl-node active">
+      <div class="trl-dot done">4</div>
+      <div class="trl-title done-t">TRL 4</div>
+      <div class="trl-desc">FMEA complete<br>System architecture<br>Power design<br>RSD finalized</div>
+    </div>
+    <div class="trl-node active">
+      <div class="trl-dot current">5</div>
+      <div class="trl-title current-t">TRL 5 — NOW</div>
+      <div class="trl-desc">Schematic capture<br>PCB modularization<br>XGBoost ML deployed<br>Dashboard live</div>
+    </div>
+    <div class="trl-node">
+      <div class="trl-dot future">6</div>
+      <div class="trl-title future-t">TRL 6</div>
+      <div class="trl-desc">PCB fabrication<br>Integrated prototype<br>Real-home pilot<br>Long-duration test</div>
+    </div>
+    <div class="trl-node">
+      <div class="trl-dot future">7</div>
+      <div class="trl-title future-t">TRL 7</div>
+      <div class="trl-desc">Field validation<br>DFM activities<br>Patent filing<br>Partner deployment</div>
+    </div>
+  </div>
+
+  <div class="goals-grid reveal reveal-delay-2">
+    <div class="goal-card">
+      <div class="goal-phase">Next 2–3 Months</div>
+      <div class="goal-item"><div class="dot"></div>Complete schematic + DRC</div>
+      <div class="goal-item"><div class="dot"></div>PCB fabrication & assembly</div>
+      <div class="goal-item"><div class="dot"></div>Integrated prototype build</div>
+      <div class="goal-item"><div class="dot"></div>Long-duration sensor drift testing</div>
+    </div>
+    <div class="goal-card">
+      <div class="goal-phase med">Medium Term</div>
+      <div class="goal-item"><div class="dot amber"></div>Dynamic sensor calibration firmware</div>
+      <div class="goal-item"><div class="dot amber"></div>Bluetooth mobile app integration</div>
+      <div class="goal-item"><div class="dot amber"></div>Field trials in real households</div>
+      <div class="goal-item"><div class="dot amber"></div>Microbial / UV safety extension</div>
+    </div>
+    <div class="goal-card">
+      <div class="goal-phase lng">Long Term</div>
+      <div class="goal-item"><div class="dot blue"></div>TRL 6–7 field prototype</div>
+      <div class="goal-item"><div class="dot blue"></div>Design for Manufacturability</div>
+      <div class="goal-item"><div class="dot blue"></div>Patent exploration</div>
+      <div class="goal-item"><div class="dot blue"></div>NGO & municipal partnerships</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TEAM ══════════════ -->
+<section id="team">
+  <div class="section-label">09 — The Team</div>
+  <div class="team-layout">
+    <div>
+      <h2 class="team-h2 reveal">Built by engineers who use the water they're trying to save.</h2>
+      <div class="team-cards reveal reveal-delay-1">
+        <div class="team-card">
+          <div class="team-name">Aarushi Chawla</div>
+          <div class="team-role">Embedded · Software · Research</div>
+          <div class="team-skills">Embedded firmware · PoC classification logic · Power architecture design · Requirement specification · B.Tech CS&D</div>
+        </div>
+        <div class="team-card">
+          <div class="team-name">Vivek Dagar</div>
+          <div class="team-role">Hardware · Electronics · Research</div>
+          <div class="team-skills">Sensor characterisation · Component selection · Schematic & PCB lead · Experimentation & data collection · B.Tech ECE & VLSI</div>
+        </div>
+      </div>
+      <div class="advisor-box reveal reveal-delay-2">
+        <div class="advisor-label">Advisors</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:0.5rem;">
+          <div>
+            <div class="advisor-name">Dr. Anuj Grover</div>
+            <div class="advisor-inst">BTP Advisor · Indraprastha Institute of Information Technology, New Delhi</div>
+          </div>
+          <div>
+            <div class="advisor-name">Mr. Manish Verma</div>
+            <div class="advisor-inst">Mentor · Ideation & Concept Refinement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestones-side reveal reveal-delay-1">
+      <div class="milestones-title">// Key Milestones Achieved</div>
+      <div class="milestone-row">
+        <div class="milestone-check" style="font-size:0.7rem;font-weight:700;">+</div>
+        <div class="milestone-text"><strong>PoC TRL-3 Complete</strong> — STM32 + sensor array, 92% accuracy</div>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone-check" style="background:var(--amber);font-size:0.65rem;font-weight:800;">01</div>
+        <div class="milestone-text"><strong>Redbricks Hackathon III — 1st Place</strong> — Ashoka University, competing against national teams</div>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone-check" style="font-size:0.7rem;font-weight:700;">+</div>
+        <div class="milestone-text"><strong>RIISE IIITD 2026</strong> — poster presented, faculty-validated</div>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone-check" style="font-size:0.7rem;font-weight:700;">+</div>
+        <div class="milestone-text"><strong>FMEA Complete</strong> — 37 failure modes, mitigation strategies</div>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone-check" style="font-size:0.7rem;font-weight:700;">+</div>
+        <div class="milestone-text"><strong>XGBoost ML Deployed</strong> — BOD/COD/Ammonia soft-sensing live</div>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone-check" style="font-size:0.7rem;font-weight:700;">+</div>
+        <div class="milestone-text"><strong>TRL-5 Schematic In Progress</strong> — KiCad, modular PCB</div>
+      </div>
+      <div style="margin-top:1.5rem; padding:1rem; background:rgba(0,229,192,0.05); border:1px solid var(--border); border-radius:4px;">
+        <div style="font-size:0.55rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem;">Academic Support</div>
+        <div style="font-size:0.65rem; color:var(--muted); line-height:1.5;">ST Microelectronics · Desmania · Altium · Centre for Intelligent Product Development, IIIT-Delhi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CTA ══════════════ -->
+<section id="cta">
+  <div class="cta-tag">HarvesSink · 2026</div>
+  <h1 class="cta-h1">
+    The drain isn't a<br>
+    <span class="em">waste outlet.</span><br>
+    <span class="em2">It's a missed opportunity.</span>
+  </h1>
+  <p class="cta-sub">HarvesSink turns every kitchen sink into an intelligent water recovery node — completing PCB fabrication, real-home pilots, and the journey from TRL-5 to TRL-7.</p>
+  <div class="cta-contacts">
+    <div class="contact-chip">
+      <span>Researcher</span>
+      Aarushi Chawla · 2023012
+    </div>
+    <div class="contact-chip">
+      <span>Researcher</span>
+      Vivek Dagar · 2023603
+    </div>
+    <div class="contact-chip">
+      <span>Institution</span>
+      IIIT-Delhi · iPD-CP
+    </div>
+    <div class="contact-chip">
+      <span>Advisors</span>
+      Dr. Anuj Grover · Mr. Manish Verma
+    </div>
+  </div>
+  <div class="cta-footer">HarvesSink · IIIT-Delhi · iPD-CP Cohort 1 · 2026</div>
+</section>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+  const pct = (scrolled / maxScroll) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+});
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
